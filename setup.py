@@ -13,6 +13,8 @@ def calc_git_version():
 
 setup(
     name="gdbstub",
+    description="Python type stubs for GDB's internal `_gdb` package.",
+    long_description=open("README.md","r").read(),
     url="https://github.com/AJMansfield/gdbstub",
     author="Anson Mansfield",
     author_email="amansfield@mantaro.com",
@@ -25,5 +27,5 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Debuggers",
         "Typing :: Stubs Only",
-    ]
+    ],
 )
