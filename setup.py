@@ -4,9 +4,13 @@ def calc_git_version():
     import subprocess
     import os
     try:
-        version = subprocess.run(['git', 'describe', '--tags'], check=True, capture_output=True, encoding='utf-8').stdout
+        version = subprocess.run(['git', 'describe', '--tags', '--broken', '--dirty'], check=True, capture_output=True, encoding='utf-8').stdout
         assert version[0] == "v"
-        version = version.strip().removeprefix("v").replace("-",".post",1).replace("-","+")
+        version = version.strip().removeprefix("v")
+        version = version.replace("-broken", "+broken")
+        version = version.replace("-dirty", "+dirty")
+        version = version.replace("-g", "+g")
+        version = version.replace("-",".post",1)
     except subprocess.CalledProcessError as e:
         version = os.path.basename(os.path.dirname(__file__)).split("-", maxsplit=1)[1]
     return version
